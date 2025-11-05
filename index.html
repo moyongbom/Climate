@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>세이빙 플래닛 H | 함께하는 고민, 함께 여는 생태 전환</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 5. 디자인: 부드럽고 트렌디한 생태 분위기 */
+        :root {
+            --color-primary: #A2C345; /* 옐로우 그린 */
+            --color-secondary: #F5F5DC; /* 아이보리 */
+            --color-text: #333333;
+            --color-light-bg: #FFFFFF;
+            --color-dark-bg: #444444;
+            --header-height: 60px; /* 헤더 높이 설정 */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* 폰트 적용: Noto Sans KR */
+            font-family: 'Noto Sans KR', sans-serif; 
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-light-bg);
+            scroll-behavior: smooth;
+            padding-top: var(--header-height); /* 헤더 공간 확보 */
+        }
+
+        /* ---------------- 네비게이션 바 스타일 ---------------- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5vw;
+        }
+
+        .logo a {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav ul li {
+            margin-left: 25px;
+        }
+
+        .nav ul li a {
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav ul li a:hover {
+            color: var(--color-primary);
+        }
+        /* ---------------------------------------------------- */
+
+
+        /* 3. 화면을 꽉 채우는 홈페이지 섹션 */
+        .section {
+            width: 100vw;
+            min-height: calc(100vh - var(--header-height)); /* 헤더 높이만큼 빼기 */
+            padding: 100px 5vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            scroll-margin-top: var(--header-height); /* 네비게이션 클릭 시 위치 조정 */
+        }
+
+        /* 2. 스크롤 페이드 인 효과를 위한 초기 설정 */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 4. 섹션별 스타일 */
+        #home {
+            background-color: var(--color-primary);
+            color: var(--color-light-bg);
+            padding-top: 0;
+            padding-bottom: 0;
+            min-height: 100vh; /* 홈 섹션은 헤더 포함 꽉 채우기 */
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        #home p {
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        #about, #news {
+            background-color: var(--color-secondary);
+        }
+
+        #activity, #support {
+            background-color: var(--color-light-bg);
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--color-primary);
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .content-box {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-weight: 300;
+        }
+
+        /* 핵심활동 (기자단) 섹션 스타일 */
+        #activity .activity-item {
+            margin: 20px 0;
+            text-align: left;
+            padding: 20px;
+            border-left: 5px solid var(--color-primary);
+            background-color: var(--color-light-bg);
+        }
+        #activity .activity-item strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        /* 뉴스/스토리 섹션 스타일 */
+        .news-card-body h3 {
+            color: var(--color-primary);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        /* 푸터 스타일 (하단 명기) */
+        footer {
+            background-color: var(--color-dark-bg);
+            color: var(--color-secondary);
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* 말풍선 아이콘 (CSS로 간단 구현) */
+        .icon {
+            /* ... (이전과 동일) ... */
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            background-color: var(--color-light-bg);
+            border-radius: 50%;
+            margin-bottom: 15px;
+            position: relative;
+            box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+        .icon::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 20px;
+            height: 20px;
+            background-color: var(--color-light-bg);
+            border-radius: 0 0 5px 0;
+        }
+        .icon-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: var(--color-primary);
+        }
+        /* 뉴스 카드 등 이전 스타일 유지 */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .news-card {
+            background-color: var(--color-light-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: left;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        .news-card-body {
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <a href="#home">세이빙 플래닛 H</a>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="#about">소개</a></li>
+                <li><a href="#activity">핵심 활동</a></li>
+                <li><a href="#campaign">캠페인</a></li>
+                <li><a href="#news">뉴스/스토리</a></li>
+                <li><a href="#support">후원/문의</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="section">
+        <div class="icon">
+            <div class="icon-content">💬</div>
+        </div>
+        <h1>세이빙 플래닛 H</h1>
+        <p class="slogan">**"함께하는 고민, 함께 여는 생태 전환."**</p>
+        <p>고등학생들이 이끄는 미래 세대 환경 재단</p>
+    </section>
+
+    <section id="about" class="section fade-in-section">
+        <h2>🌱 재단 소개</h2>
+        <div class="content-box">
+            <p><strong>Saving Planet H</strong>는 고등학생(H)의 목소리를 담아 지구(Planet)를 지키고(Saving), 희망(Hope)을 만드는 비영리 재단입니다. 청소년의 시각으로 환경 문제를 고민하고, 창의적인 콘텐츠와 행동으로 **생태 전환**을 이끌어갑니다.</p>
+            <p style="margin-top: 15px;">**비전:** 청소년이 주도하는 지속 가능한 생태 공동체 구축</p>
+        </div>
+    </section>
+
+    <section id="activity" class="section fade-in-section">
+        <h2>✍️ 핵심 활동: 에코 기자단</h2>
+        <div class="content-box">
+            <p>우리 재단의 핵심은 **'청소년 에코 기자단/콘텐츠 크리에이터'** 입니다. 우리는 단순한 환경 보호를 넘어, **지속적인 소통과 정보 확산**을 통해 변화를 만듭니다.</p>
+            <div class="activity-item">
+                <strong>1. 콘텐츠 기획 및 제작 교육</strong>
+                <span>기사 작성, 카드뉴스 디자인, 영상 편집 등 환경 콘텐츠 제작에 필요한 전문 교육을 제공합니다.</span>
+            </div>
+            <div class="activity-item">
+                <strong>2. 생태 현장 취재 활동</strong>
+                <span>멸종 위기종 서식지, 환경 정책 현장 등을 직접 방문하고 취재하여 살아있는 정보를 전달합니다.</span>
+            </div>
+            <div class="activity-item">
+                <strong>3. 웹/앱 페이지 및 SNS 홍보</strong>
+                <span>제작된 콘텐츠는 재단 플랫폼을 통해 대중에게 널리 공유되며, 청소년 환경 인식을 제고하는 데 사용됩니다.</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="campaign" class="section fade-in-section">
+        <h2>📢 현재 진행 중인 캠페인 참여</h2>
+        <div class="content-box">
+            <p>지금 바로 **'세이빙 플래닛 H'**의 활동에 참여하세요. 작은 행동이 세상을 바꿉니다.</p>
+            <div class="news-grid" style="margin-top: 30px;">
+                <div class="news-card">
+                    <div class="news-card-body">
+                        <h3>#1. 플라스틱 ZERO 일주일 챌린지</h3>
+                        <p>개인 텀블러 사용 인증, 불필요한 포장재 거부 등 일상 속 제로 웨이스트 실천 챌린지.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-card-body">
+                        <h3>#2. 우리 동네 생물 관찰 기록단 모집</h3>
+                        <p>학교 주변 생물다양성 모니터링에 참여하여 시민 과학자로서 생태 지도를 완성해 보세요.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-card-body">
+                        <h3>#3. 에코 멘토링 프로그램 지원</h3>
+                        <p>환경 전문가와의 1:1 멘토링을 통해 환경 관련 진로를 탐색하고 프로젝트를 진행합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="news" class="section fade-in-section">
+        <h2>📰 에코 기자단 뉴스/스토리</h2>
+        <div class="content-box">
+            <p>청소년 에코 기자단이 직접 취재하고 제작한 최신 환경 뉴스와 따뜻한 이야기를 만나보세요.</p>
+            <div class="news-grid" style="margin-top: 30px;">
+                <div class="news-card">
+                    <div class="news-card-body">
+                        <span>[기자단 소식]</span>
+                        <h3>학교 텃밭에서 찾은 생물 다양성 이야기</h3>
+                        <small>2025.10.28. | 김OO 기자</small>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-card-body">
+                        <span>[캠페인 결과]</span>
+                        <h3>'잔반 없는 날' 캠페인, 급식실 변화 이끌다</h3>
+                        <small>2025.10.25. | 이OO 크리에이터</small>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-card-body">
+                        <span>[환경 이슈]</span>
+                        <h3>미세 플라스틱, 우리 밥상까지? 심층 분석</h3>
+                        <small>2025.10.20. | 박OO 기자</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="support" class="section fade-in-section">
+        <h2>💚 후원 및 문의</h2>
+        <div class="content-box">
+            <p>**세이빙 플래닛 H**의 활동은 여러분의 관심과 후원으로 지속됩니다. 미래 세대 환경 리더를 키우는 일에 동참해 주세요.</p>
+            <p style="margin-top: 20px;">
+                **후원 계좌:** [계좌번호 명기] <br>
+                **문의 이메일:** contact@savingplaneth.org <br>
+                **사무국 전화:** 02-1234-5678
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Saving Planet H. All rights reserved.</p>
+        <p style="margin-top: 5px;">**이 홈페이지의 지적 소유권은 재단에 있습니다.**</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 모든 'fade-in-section' 클래스를 가진 섹션을 가져옴
+            const sections = document.querySelectorAll('.fade-in-section');
+
+            // 옵저버 설정
+            const observerOptions = {
+                root: null, // 뷰포트를 기준으로 관찰
+                rootMargin: '0px',
+                threshold: 0.1 // 섹션의 10%가 보일 때 콜백 실행
+            };
+
+            // Intersection Observer 생성
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    // 섹션이 뷰포트에 들어왔을 때
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // 한번 보인 섹션은 더 이상 관찰하지 않음
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // 각 섹션을 관찰
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
